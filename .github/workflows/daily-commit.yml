@@ -1,0 +1,39 @@
+name: Daily Commit Workflow
+
+on:
+  schedule:
+    # Run at 12:30 UTC daily
+    - cron: '30 18 * * *'
+  # Allow manual triggering for testing
+  workflow_dispatch:
+
+jobs:
+  create-daily-commit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "24ds3000090@ds.study.iitm.ac.in"
+          
+      - name: 24ds3000090@ds.study.iitm.ac.in
+        run: |
+          # Get current date
+          DATE=$(date '+%Y-%m-%d')
+          
+          # Create or update the daily log file
+          echo "Daily update: $DATE" >> daily-updates.log
+          
+          # Stage the changes
+          git add daily-updates.log
+          
+          # Create commit
+          git commit -m "Daily automated commit for $DATE"
+          
+      - name: Push changes
+        run: |
+          git push origin ${GITHUB_REF#refs/heads/}
