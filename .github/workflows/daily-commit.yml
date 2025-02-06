@@ -18,16 +18,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
           
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "24ds3000090@ds.study.iitm.ac.in"
           
-      - name: 24ds3000090@ds.study.iitm.ac.in
+      - name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
         run: |
           # Get current date
           DATE=$(date '+%Y-%m-%d')
+          
+          # Fetch latest changes and reset to match remote
+          git fetch origin
+          git reset --hard origin/main
           
           # Create or update the daily log file
           echo "Daily update: $DATE" >> daily-updates.log
@@ -40,4 +45,5 @@ jobs:
           
       - name: Push changes
         run: |
-          git push origin ${GITHUB_REF#refs/heads/}
+          # Force push since we've reset the branch
+          git push --force origin HEAD:main
