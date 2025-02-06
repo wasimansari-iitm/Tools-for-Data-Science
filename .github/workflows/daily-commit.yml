@@ -3,18 +3,22 @@ name: Daily Commit Workflow
 on:
   schedule:
     # Run at 12:30 UTC daily
-    - cron: '30 18 * * *'
+    - cron: '30 12 * * *'
   # Allow manual triggering for testing
   workflow_dispatch:
 
 jobs:
   create-daily-commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
