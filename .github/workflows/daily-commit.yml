@@ -15,10 +15,17 @@ jobs:
       - name: 24ds3000090@ds.study.iitm.ac.in
         uses: actions/checkout@v4
 
-      - name: Commit and push changes
+      name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add *
-          git commit -m "daily commit" || exit 0
-          git push
+          DATE=$(date '+%Y-%m-%d')
+          git fetch origin
+          git reset --hard origin/main
+          
+          echo "Daily update: $DATE" >> daily-updates.log
+          git add daily-updates.log
+          
+          git commit -m "Daily automated commit for $DATE"
+          
+      - name: Push changes
+        run: |
+          git push --force origin HEAD:main
