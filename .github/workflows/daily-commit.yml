@@ -14,7 +14,7 @@ jobs:
       contents: write
     
     steps:
-      - name: Checkout repository
+      - name: 24ds3000090@ds.study.iitm.ac.in
         uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
