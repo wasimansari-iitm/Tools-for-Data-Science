@@ -15,7 +15,7 @@ jobs:
       - name: 24ds3000090@ds.study.iitm.ac.in
         uses: actions/checkout@v4
 
-      name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
+      - name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
         run: |
           DATE=$(date '+%Y-%m-%d')
           git fetch origin
