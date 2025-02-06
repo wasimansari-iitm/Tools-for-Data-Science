@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: 24ds3000090@ds.study.iitm.ac.in
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
         run: |
