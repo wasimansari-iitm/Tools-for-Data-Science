@@ -1,0 +1,86 @@
+TOOLS = [
+    {
+        "type": "function",
+        "function": {
+            "name": "get_ticket_status",
+            "description": "Get the status of an IT support ticket",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "ticket_id": {"type": "integer", "description": "ID of the support ticket"}
+                },
+                "required": ["ticket_id"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "schedule_meeting",
+            "description": "Schedule a meeting",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "date": {"type": "string", "description": "Date of the meeting"},
+                    "time": {"type": "string", "description": "Time of the meeting"},
+                    "meeting_room": {"type": "string", "description": "Room for the meeting"},
+                },
+                "required": ["date", "time", "meeting_room"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_expense_balance",
+            "description": "Retrieve expense reimbursement balance",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "employee_id": {"type": "integer", "description": "Employee ID"},
+                },
+                "required": ["employee_id"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "calculate_performance_bonus",
+            "description": "Calculate performance bonus for an employee",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "employee_id": {"type": "integer", "description": "Employee ID"},
+                    "current_year": {"type": "integer", "description": "Year for bonus calculation"},
+                },
+                "required": ["employee_id", "current_year"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "report_office_issue",
+            "description": "Report an office issue",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "issue_code": {"type": "integer", "description": "Issue code"},
+                    "department": {"type": "string", "description": "Department reporting the issue"},
+                },
+                "required": ["issue_code", "department"],
+                "additionalProperties": False,
+            },
+            "strict": True,
+        },
+    },
+]
