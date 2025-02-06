@@ -1,49 +1,24 @@
-name: Daily Commit Workflow
+name: Daily Commit
 
 on:
   schedule:
-    # Run at 12:30 UTC daily
-    - cron: '30 12 * * *'
-  # Allow manual triggering for testing
-  workflow_dispatch:
+    - cron: "0 0 * * *"
+  workflow_dispatch: 
 
 jobs:
-  create-daily-commit:
+  scrape-imdb:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    
+
     steps:
       - name: 24ds3000090@ds.study.iitm.ac.in
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          fetch-depth: 0
-          
-      - name: Configure Git
+        uses: actions/checkout@v4
+
+      - name: Commit and push changes
         run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "24ds3000090@ds.study.iitm.ac.in"
-          
-      - name: Create daily commit by 24ds3000090@ds.study.iitm.ac.in
-        run: |
-          # Get current date
-          DATE=$(date '+%Y-%m-%d')
-          
-          # Fetch latest changes and reset to match remote
-          git fetch origin
-          git reset --hard origin/main
-          
-          # Create or update the daily log file
-          echo "Daily update: $DATE" >> daily-updates.log
-          
-          # Stage the changes
-          git add daily-updates.log
-          
-          # Create commit
-          git commit -m "Daily automated commit for $DATE"
-          
-      - name: Push changes
-        run: |
-          # Force push since we've reset the branch
-          git push --force origin HEAD:main
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add *
+          git commit -m "daily commit" || exit 0
+          git push
