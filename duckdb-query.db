@@ -1,0 +1,21 @@
+SELECT DISTINCT
+    post_id
+FROM
+    social_media,
+WHERE
+    timestamp >= '2024-12-30T07:46:48.930Z'  -- Filter by timestamp
+    AND ARRAY_LENGTH(comments) > 0           -- Ensure comments array is not empty
+FROM
+    social_media,    
+    UNNEST(comments) AS comment
+    AND comments.stars.useful > 2             -- Filter comments with useful stars > 2
+ORDER BY
+    post_id ASC;
+
+
+SELECT
+    json_extract_string(comments, '$.post_id') as comment,
+    
+FROM read_json_auto('data/*.jsonl')
+GROUP BY 1
+HAVING avg_value > 100
